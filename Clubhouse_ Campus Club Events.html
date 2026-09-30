@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Campus Club Events</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5fa;--surface:#fff;--ink:#16203a;--muted:#5b6479;--line:#dde1ec;--brand:#2d3fd3;--brand-ink:#fff;--accent:#ffc83d;--accent-ink:#16203a;--danger:#c2312b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1424;--surface:#181f36;--ink:#eef0f8;--muted:#98a1bb;--line:#2a3352;--brand:#8b98ff;--brand-ink:#0f1424;--danger:#ff7b73}}
+:root[data-theme="dark"]{--bg:#0f1424;--surface:#181f36;--ink:#eef0f8;--muted:#98a1bb;--line:#2a3352;--brand:#8b98ff;--brand-ink:#0f1424;--danger:#ff7b73}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Inter,system-ui,sans-serif;line-height:1.1;margin:0}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;flex-wrap:wrap}
+.logo{font:800 20px "Bricolage Grotesque",sans-serif;text-decoration:none}
+nav{display:flex;gap:4px}
+nav a{padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:500;color:var(--muted)}
+nav a.on{background:var(--ink);color:var(--bg)}
+nav a:hover:not(.on){background:var(--bg)}
+button,input,select,textarea{font:inherit;color:inherit}
+.btn{border:0;border-radius:8px;padding:10px 18px;font-weight:600;cursor:pointer;background:var(--brand);color:var(--brand-ink)}
+.btn.alt{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn.sm{padding:6px 12px;font-size:14px}.btn.del{color:var(--danger)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.hero{padding:56px 0 40px}
+.hero h1{font-size:clamp(38px,8vw,76px);font-weight:800;letter-spacing:-.02em;max-width:14ch}
+.hero p{font-size:19px;color:var(--muted);max-width:52ch;margin:18px 0 26px}
+.clubs{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:4px 12px;font-size:14px;color:var(--muted)}
+.feat{display:grid;grid-template-columns:auto 1fr;gap:28px;background:var(--brand);color:var(--brand-ink);border-radius:18px;padding:32px;margin:8px 0 48px}
+.stamp{background:var(--accent);color:var(--accent-ink);border-radius:14px;padding:14px 20px;text-align:center;align-self:start;min-width:96px}
+.stamp b{display:block;font:800 52px/1 "Bricolage Grotesque",sans-serif}
+.stamp span{font-weight:600}
+.feat h2{font-size:clamp(28px,5vw,44px);margin-bottom:10px}
+.feat .meta{opacity:.85;margin-bottom:14px}
+.feat .btn{background:var(--accent);color:var(--accent-ink)}
+h2.sec{font-size:28px;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;margin-bottom:48px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.card h3{font-size:21px}
+.card .meta{color:var(--muted);font-size:14px}
+.card p{margin:0;flex:1}
+.tag{align-self:flex-start;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:2px 10px;font-size:13px;font-weight:600}
+.tag.past{color:var(--muted)}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 22px}
+.bar input,.bar select,.f input,.f select,.f textarea{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);min-width:0}
+.bar input{flex:1 1 220px}
+.empty{padding:40px 16px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}
+dialog{border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);padding:24px;width:min(480px,calc(100% - 24px));max-height:calc(100% - 24px)}
+dialog::backdrop{background:rgba(10,14,30,.6)}
+.f{display:grid;gap:12px;margin-top:14px}
+.f label{display:grid;gap:4px;font-weight:500;font-size:14px}
+.f input,.f select,.f textarea{width:100%}
+.f .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.acts{display:flex;gap:10px;justify-content:flex-end;margin-top:6px;flex-wrap:wrap}
+.tabs{display:flex;gap:8px;margin:24px 0 18px}
+.tabs button{padding:8px 16px;border:1px solid var(--line);background:var(--surface);border-radius:8px;cursor:pointer;font-weight:600}
+.tabs button.on{background:var(--ink);color:var(--bg)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:15px;vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:14px}
+tr:last-child td{border-bottom:0}
+td .btn{margin-right:6px}
+.login{max-width:360px;margin:60px auto}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+#toast.show{opacity:1}
+footer{padding:28px 0 40px;color:var(--muted);font-size:14px}
+@media (max-width:640px){.feat{grid-template-columns:1fr;padding:22px}.stamp{justify-self:start}.f .row{grid-template-columns:1fr}.hero{padding-top:36px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="#/">Clubhouse</a>
+  <nav aria-label="Main"><a href="#/" data-r="home">Home</a><a href="#/events" data-r="events">Events</a><a href="#/admin" data-r="admin">Admin</a></nav>
+</div></header>
+<main class="wrap" id="app"></main>
+<footer class="wrap">Clubhouse: one place for every club event on campus.</footer>
+
+<dialog id="regDlg"><h2 id="regTitle">Register</h2><p id="regMeta" class="meta" style="color:var(--muted);margin:4px 0 0"></p>
+<form class="f" id="regForm" method="dialog" novalidate>
+  <label>Full name<input name="name" required autocomplete="name"></label>
+  <label>Email<input name="email" type="email" required autocomplete="email"></label>
+  <div class="row"><label>College and year<input name="college" required placeholder="e.g. St. Xavier's, 2nd year"></label>
+  <label>Phone number<input name="phone" type="tel" required inputmode="tel" autocomplete="tel"></label></div>
+  <p id="regErr" style="color:var(--danger);margin:0;min-height:1em" role="alert"></p>
+  <div class="acts"><button type="button" class="btn ghost" data-close>Cancel</button><button class="btn" type="submit">Submit registration</button></div>
+</form></dialog>
+
+<dialog id="evDlg"><h2 id="evTitle">Add event</h2>
+<form class="f" id="evForm" method="dialog" novalidate>
+  <label>Event name<input name="name" required></label>
+  <div class="row"><label>Date and time<input name="date" type="datetime-local" required></label>
+  <label>Category<select name="category"></select></label></div>
+  <label>Venue<input name="venue" required></label>
+  <label>Description<textarea name="desc" rows="3" required></textarea></label>
+  <label style="display:flex;gap:8px;align-items:center;flex-direction:row"><input type="checkbox" name="featured" style="width:auto"> Feature this event on the home page</label>
+  <p id="evErr" style="color:var(--danger);margin:0;min-height:1em" role="alert"></p>
+  <div class="acts"><button type="button" class="btn ghost" data-close>Cancel</button><button class="btn" type="submit">Save event</button></div>
+</form></dialog>
+<div id="toast" role="status"></div>
+
+<script>
+const CATS=["Tech","Cultural","Sports","Workshop","Social"];
+const PASS="admin123";
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const mem={};
+const store={
+  get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):(k in mem?mem[k]:d)}catch(e){return k in mem?mem[k]:d}},
+  set(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+const day=n=>{const d=new Date();d.setDate(d.getDate()+n);d.setHours(17,0,0,0);const p=x=>String(x).padStart(2,"0");return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:00`};
+let events=store.get("ce_events",null);
+if(!events){events=[
+ {id:"e1",name:"Hack the Campus 24h",date:day(6),venue:"Innovation Lab, Block C",category:"Tech",desc:"A day-long hackathon in teams of four. Build something that makes campus life easier. Mentors from the Coding Club on hand.",featured:true},
+ {id:"e2",name:"Open Mic Night",date:day(2),venue:"Amphitheatre",category:"Cultural",desc:"Poetry, music and stand-up. Sign up to perform or just come and listen.",featured:false},
+ {id:"e3",name:"Inter-Department Football Cup",date:day(10),venue:"Main Ground",category:"Sports",desc:"Seven-a-side knockout. Each department fields one team.",featured:false},
+ {id:"e4",name:"Intro to UI Design",date:day(4),venue:"Seminar Hall 2",category:"Workshop",desc:"Hands-on Figma session for beginners. Bring a laptop.",featured:false},
+ {id:"e5",name:"Freshers' Picnic",date:day(14),venue:"Lake Garden",category:"Social",desc:"Meet the clubs, play games and share lunch on the lawn.",featured:false},
+ {id:"e6",name:"Photo Walk",date:day(-5),venue:"Old Town Gate",category:"Workshop",desc:"A guided walk on street photography basics.",featured:false}];
+ store.set("ce_events",events)}
+let regs=store.get("ce_regs",[]);
+const saveE=()=>store.set("ce_events",events), saveR=()=>store.set("ce_regs",regs);
+const fmt=d=>new Date(d).toLocaleString(undefined,{weekday:"short",day:"numeric",month:"short",hour:"numeric",minute:"2-digit"});
+const isPast=e=>new Date(e.date)<new Date();
+const upcoming=()=>events.filter(e=>!isPast(e)).sort((a,b)=>new Date(a.date)-new Date(b.date));
+const uid=()=>Math.random().toString(36).slice(2,9);
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),2200)}
+
+function card(e){
+  const past=isPast(e);
+  return `<article class="card"><span class="tag ${past?"past":""}">${past?"Past · ":""}${esc(e.category)}</span>
+  <h3>${esc(e.name)}</h3><div class="meta">${fmt(e.date)}<br>${esc(e.venue)}</div><p>${esc(e.desc)}</p>
+  <button class="btn" data-reg="${e.id}" ${past?"disabled":""}>${past?"Registration closed":"Register"}</button></article>`}
+
+function home(){
+  const up=upcoming(); const f=events.find(e=>e.featured&&!isPast(e))||up[0];
+  let h=`<section class="hero"><h1>What's happening on campus</h1><p>Clubhouse brings every club's events together. Find something you like, register in a minute, and turn up.</p>
+  <button class="btn alt" onclick="location.hash='#/events'">Browse all events</button>
+  <div class="clubs" aria-label="Clubs">${CATS.map(c=>`<span class="chip">${c}</span>`).join("")}</div></section>`;
+  if(f){const d=new Date(f.date);h+=`<section class="feat" aria-label="Featured event"><div class="stamp"><b>${d.getDate()}</b><span>${d.toLocaleString(undefined,{month:"short"})}</span></div>
+  <div><span class="tag" style="background:var(--accent);color:var(--accent-ink);border:0">Featured</span><h2 style="margin-top:12px">${esc(f.name)}</h2>
+  <div class="meta">${fmt(f.date)} at ${esc(f.venue)}</div><p style="margin:0 0 18px;max-width:60ch">${esc(f.desc)}</p><button class="btn" data-reg="${f.id}">Register now</button></div></section>`}
+  h+=`<h2 class="sec">Upcoming events</h2>`+(up.length?`<div class="grid">${up.slice(0,3).map(card).join("")}</div>`:`<div class="empty">No upcoming events yet. Check back soon.</div>`);
+  return h}
+
+let q="",cat="";
+function events_(){
+  return `<h2 class="sec" style="margin-top:32px">All events</h2>
+  <div class="bar"><input id="q" type="search" placeholder="Search events by name" aria-label="Search events" value="${esc(q)}">
+  <select id="cat" aria-label="Filter by category"><option value="">All categories</option>${CATS.map(c=>`<option ${c===cat?"selected":""}>${c}</option>`).join("")}</select></div>
+  <div id="list"></div>`}
+function paintList(){
+  const l=events.filter(e=>(!cat||e.category===cat)&&e.name.toLowerCase().includes(q.toLowerCase())).sort((a,b)=>new Date(a.date)-new Date(b.date));
+  $("#list").innerHTML=l.length?`<div class="grid">${l.map(card).join("")}</div>`:`<div class="empty">No events match. Try a different name or category.</div>`}
+
+let adminTab="events",rq="",rev="";
+function admin(){
+  let ok=false;try{ok=sessionStorage.getItem("ce_admin")==="1"}catch(e){ok=!!mem.admin}
+  if(!ok)return `<form class="f login" id="login"><h2>Admin sign in</h2><label>Passcode<input type="password" name="p" autocomplete="off"></label>
+  <p id="lerr" style="color:var(--danger);margin:0;min-height:1em" role="alert"></p><button class="btn">Sign in</button></form>`;
+  let h=`<div class="top" style="margin-top:28px"><h2 class="sec" style="margin:0">Admin dashboard</h2><button class="btn ghost sm" id="out">Sign out</button></div>
+  <div class="tabs"><button data-tab="events" class="${adminTab==="events"?"on":""}">Events (${events.length})</button><button data-tab="regs" class="${adminTab==="regs"?"on":""}">Registrations (${regs.length})</button></div>`;
+  if(adminTab==="events"){
+    h+=`<div class="acts" style="justify-content:flex-start;margin:0 0 14px"><button class="btn" id="add">Add event</button></div>
+    <div class="scroll"><table><thead><tr><th>Event</th><th>When</th><th>Category</th><th>Signups</th><th></th></tr></thead><tbody>${
+    events.map(e=>`<tr><td><b>${esc(e.name)}</b>${e.featured?' <span class="tag">Featured</span>':""}<br><span style="color:var(--muted)">${esc(e.venue)}</span></td><td>${fmt(e.date)}</td><td>${esc(e.category)}</td><td>${regs.filter(r=>r.eventId===e.id).length}</td>
+    <td><button class="btn ghost sm" data-edit="${e.id}">Edit</button><button class="btn ghost sm del" data-del="${e.id}">Delete</button></td></tr>`).join("")||`<tr><td colspan="5">No events. Add your first event.</td></tr>`}</tbody></table></div>`}
+  else{
+    h+=`<div class="bar"><input id="rq" type="search" placeholder="Search by name, email, college or phone" aria-label="Search registrations" value="${esc(rq)}">
+    <select id="rev" aria-label="Filter by event"><option value="">All events</option>${events.map(e=>`<option value="${e.id}" ${e.id===rev?"selected":""}>${esc(e.name)}</option>`).join("")}</select></div><div id="rtable"></div>`}
+  return h}
+function paintRegs(){
+  const en=Object.fromEntries(events.map(e=>[e.id,e.name]));
+  const l=regs.filter(r=>(!rev||r.eventId===rev)&&[r.name,r.email,r.college,r.phone].join(" ").toLowerCase().includes(rq.toLowerCase()));
+  $("#rtable").innerHTML=l.length?`<div class="scroll"><table><thead><tr><th>Student</th><th>Contact</th><th>College / year</th><th>Event</th><th></th></tr></thead><tbody>${
+  l.map(r=>`<tr><td><b>${esc(r.name)}</b></td><td>${esc(r.email)}<br>${esc(r.phone)}</td><td>${esc(r.college)}</td><td>${esc(en[r.eventId]||"Deleted event")}</td><td><button class="btn ghost sm del" data-rdel="${r.id}">Remove</button></td></tr>`).join("")}</tbody></table></div>`
+  :`<div class="empty">No registrations found.</div>`}
+
+function route(){
+  const r=(location.hash.replace("#/","")||"home").split("?")[0];
+  document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.r===r));
+  const app=$("#app");
+  app.innerHTML=r==="events"?events_():r==="admin"?admin():home();
+  if(r==="events")paintList();
+  if(r==="admin"&&adminTab==="regs"&&$("#rtable"))paintRegs();
+  window.scrollTo(0,0)}
+addEventListener("hashchange",route);
+
+let regFor=null,editId=null;
+const regDlg=$("#regDlg"),evDlg=$("#evDlg");
+$("#evForm").category.innerHTML=CATS.map(c=>`<option>${c}</option>`).join("");
+document.addEventListener("click",ev=>{
+  const t=ev.target.closest("button");if(!t)return;
+  if(t.dataset.close!==undefined)t.closest("dialog").close();
+  if(t.dataset.reg){regFor=events.find(e=>e.id===t.dataset.reg);$("#regTitle").textContent="Register: "+regFor.name;$("#regMeta").textContent=fmt(regFor.date)+" · "+regFor.venue;$("#regErr").textContent="";$("#regForm").reset();regDlg.showModal()}
+  if(t.dataset.tab){adminTab=t.dataset.tab;route()}
+  if(t.id==="out"){try{sessionStorage.removeItem("ce_admin")}catch(e){}mem.admin=0;route()}
+  if(t.id==="add"||t.dataset.edit){
+    const e=t.dataset.edit?events.find(x=>x.id===t.dataset.edit):null;editId=e?e.id:null;
+    const f=$("#evForm");f.reset();$("#evTitle").textContent=e?"Edit event":"Add event";$("#evErr").textContent="";
+    if(e){f.name.value=e.name;f.date.value=e.date;f.category.value=e.category;f.venue.value=e.venue;f.desc.value=e.desc;f.featured.checked=!!e.featured}
+    evDlg.showModal()}
+  if(t.dataset.del){const e=events.find(x=>x.id===t.dataset.del);if(confirm(`Delete "${e.name}" and its registrations?`)){events=events.filter(x=>x.id!==e.id);regs=regs.filter(r=>r.eventId!==e.id);saveE();saveR();toast("Event deleted");route()}}
+  if(t.dataset.rdel){regs=regs.filter(r=>r.id!==t.dataset.rdel);saveR();toast("Registration removed");paintRegs()}
+});
+document.addEventListener("input",ev=>{
+  if(ev.target.id==="q"){q=ev.target.value;paintList()}
+  if(ev.target.id==="rq"){rq=ev.target.value;paintRegs()}
+});
+document.addEventListener("change",ev=>{
+  if(ev.target.id==="cat"){cat=ev.target.value;paintList()}
+  if(ev.target.id==="rev"){rev=ev.target.value;paintRegs()}
+});
+document.addEventListener("submit",ev=>{
+  if(ev.target.id==="login"){ev.preventDefault();
+    if(ev.target.p.value===PASS){try{sessionStorage.setItem("ce_admin","1")}catch(e){}mem.admin=1;route()}else $("#lerr").textContent="Wrong passcode. Try again."}
+});
+$("#regForm").addEventListener("submit",ev=>{
+  ev.preventDefault();const f=ev.target,v=Object.fromEntries(new FormData(f));
+  const err=$("#regErr");
+  if(!v.name.trim()||!v.college.trim())return err.textContent="Enter your name and college/year.";
+  if(!/^\S+@\S+\.\S+$/.test(v.email))return err.textContent="Enter a valid email address.";
+  if(v.phone.replace(/\D/g,"").length<7)return err.textContent="Enter a valid phone number.";
+  if(regs.some(r=>r.eventId===regFor.id&&r.email.toLowerCase()===v.email.toLowerCase()))return err.textContent="This email is already registered for this event.";
+  regs.push({id:uid(),eventId:regFor.id,name:v.name.trim(),email:v.email.trim(),college:v.college.trim(),phone:v.phone.trim(),ts:Date.now()});
+  saveR();regDlg.close();toast("You're registered for "+regFor.name)});
+$("#evForm").addEventListener("submit",ev=>{
+  ev.preventDefault();const f=ev.target,v=Object.fromEntries(new FormData(f));
+  if(!v.name.trim()||!v.date||!v.venue.trim()||!v.desc.trim())return $("#evErr").textContent="Fill in every field.";
+  const o={name:v.name.trim(),date:v.date,category:v.category,venue:v.venue.trim(),desc:v.desc.trim(),featured:!!v.featured};
+  if(o.featured)events.forEach(e=>e.featured=false);
+  if(editId)Object.assign(events.find(e=>e.id===editId),o);else events.push({id:uid(),...o});
+  saveE();evDlg.close();toast(editId?"Event updated":"Event added");route()});
+route();
+</script>
+</body>
+</html>
